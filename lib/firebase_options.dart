@@ -39,13 +39,14 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'YOUR_WEB_API_KEY',
-    appId: 'YOUR_WEB_APP_ID',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    authDomain: 'YOUR_AUTH_DOMAIN',
-    databaseURL: 'YOUR_DATABASE_URL',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
+    apiKey: 'AIzaSyCiuHu1FsEeFUOsX3ygkN2rdjrS7maVTFQ',
+    appId: '1:728552713392:web:1b02282ec4da62ed6edf75',
+    messagingSenderId: '728552713392',
+    projectId: 'torkh-app',
+    authDomain: 'torkh-app.firebaseapp.com',
+    databaseURL: 'https://torkh-app-default-rtdb.firebaseio.com',
+    storageBucket: 'torkh-app.firebasestorage.app',
+    measurementId: 'G-JG49RF03WP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -53,35 +54,39 @@ class DefaultFirebaseOptions {
     appId: '1:728552713392:android:06047b5c5c71c09c6edf75',
     messagingSenderId: '728552713392',
     projectId: 'torkh-app',
+    databaseURL: 'https://torkh-app-default-rtdb.firebaseio.com',
     storageBucket: 'torkh-app.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'YOUR_IOS_API_KEY',
-    appId: 'YOUR_IOS_APP_ID',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    databaseURL: 'YOUR_DATABASE_URL',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
+    apiKey: 'AIzaSyCT-poOBy_bIKeGGNf9StMTfQsFlA4XsB8',
+    appId: '1:728552713392:ios:612017aabb32e1af6edf75',
+    messagingSenderId: '728552713392',
+    projectId: 'torkh-app',
+    databaseURL: 'https://torkh-app-default-rtdb.firebaseio.com',
+    storageBucket: 'torkh-app.firebasestorage.app',
     iosBundleId: 'com.example.flutterApplication1',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'YOUR_MACOS_API_KEY',
-    appId: 'YOUR_MACOS_APP_ID',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    databaseURL: 'YOUR_DATABASE_URL',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
+    apiKey: 'AIzaSyCT-poOBy_bIKeGGNf9StMTfQsFlA4XsB8',
+    appId: '1:728552713392:ios:612017aabb32e1af6edf75',
+    messagingSenderId: '728552713392',
+    projectId: 'torkh-app',
+    databaseURL: 'https://torkh-app-default-rtdb.firebaseio.com',
+    storageBucket: 'torkh-app.firebasestorage.app',
     iosBundleId: 'com.example.flutterApplication1',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'YOUR_WINDOWS_API_KEY',
-    appId: 'YOUR_WINDOWS_APP_ID',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    databaseURL: 'YOUR_DATABASE_URL',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
+    apiKey: 'AIzaSyCiuHu1FsEeFUOsX3ygkN2rdjrS7maVTFQ',
+    appId: '1:728552713392:web:524b8c5bee0aabde6edf75',
+    messagingSenderId: '728552713392',
+    projectId: 'torkh-app',
+    authDomain: 'torkh-app.firebaseapp.com',
+    databaseURL: 'https://torkh-app-default-rtdb.firebaseio.com',
+    storageBucket: 'torkh-app.firebasestorage.app',
+    measurementId: 'G-081CRDYWCH',
   );
+
 }

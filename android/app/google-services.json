@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "728552713392",
+    "firebase_url": "https://torkh-app-default-rtdb.firebaseio.com",
     "project_id": "torkh-app",
     "storage_bucket": "torkh-app.firebasestorage.app"
   },

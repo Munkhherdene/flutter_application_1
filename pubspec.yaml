@@ -38,8 +38,12 @@ dependencies:
   firebase_core: ^4.0.0
   firebase_auth: ^6.0.0
   google_sign_in: ^6.2.0
+<<<<<<< HEAD
   http: ^1.2.1
   logging: ^1.2.0
+  cloud_firestore: ^6.1.1
+=======
+>>>>>>> parent of 7bc2d22 (Update API service, add logging, fix customer model)
 
 dev_dependencies:
   flutter_test:

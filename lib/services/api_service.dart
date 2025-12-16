@@ -56,6 +56,44 @@ class ApiService {
       'https://distapiv1.smartlogic.mn/api/info/customers';
 
   static Future<List<Customer>> fetchCustomers() async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) throw Exception('User not logged in');
+
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('customers')
+        .get();
+
+    if (snapshot.docs.isEmpty) {
+      // Import from API if no customers in Firebase
+      await _importCustomersFromApi(userId);
+      // Fetch again
+      final newSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('customers')
+          .get();
+      final customers = newSnapshot.docs.map((doc) {
+        final data = doc.data();
+        data['id'] = doc.id;
+        return Customer.fromJson(data);
+      }).toList();
+      _logger.info('Customers imported and loaded from Firebase: ${customers.length}');
+      return customers;
+    }
+
+    final customers = snapshot.docs.map((doc) {
+      final data = doc.data();
+      data['id'] = doc.id;
+      return Customer.fromJson(data);
+    }).toList();
+
+    _logger.info('Customers loaded from Firebase: ${customers.length}');
+    return customers;
+  }
+
+  static Future<void> _importCustomersFromApi(String userId) async {
     final token = await getToken();
 
     final response = await http.get(
@@ -67,38 +105,32 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      _logger.info('Response body: ${response.body}');
-      try {
-        final decoded = jsonDecode(response.body);
-        List<dynamic> jsonData;
-        if (decoded is List) {
-          jsonData = decoded;
-        } else if (decoded is Map && decoded.containsKey('customers')) {
-          jsonData = decoded['customers'] as List<dynamic>;
-        } else if (decoded is Map && decoded.containsKey('data')) {
-          jsonData = decoded['data'] as List<dynamic>;
-        } else {
-          throw Exception('Unexpected response format');
-        }
-        _logger.info('Customers loaded: ${jsonData.length}');
-        final customers = jsonData.map((e) {
-          try {
-            return Customer.fromJson(e as Map<String, dynamic>);
-          } catch (e) {
-            _logger.severe('Error parsing customer: $e, data: $e');
-            throw Exception('Failed to parse customer data');
-          }
-        }).toList();
-        return customers;
-      } catch (e) {
-        _logger.severe('Error decoding JSON: $e, body: ${response.body}');
-        throw Exception('Failed to decode customer data');
+      final decoded = jsonDecode(response.body);
+      List<dynamic> jsonData;
+      if (decoded is List) {
+        jsonData = decoded;
+      } else if (decoded is Map && decoded.containsKey('customers')) {
+        jsonData = decoded['customers'] as List<dynamic>;
+      } else if (decoded is Map && decoded.containsKey('data')) {
+        jsonData = decoded['data'] as List<dynamic>;
+      } else {
+        throw Exception('Unexpected response format');
       }
+
+      final batch = FirebaseFirestore.instance.batch();
+      for (final item in jsonData) {
+        final customer = Customer.fromJson(item as Map<String, dynamic>);
+        final docRef = FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .collection('customers')
+            .doc(customer.id.toString());
+        batch.set(docRef, customer.toJson());
+      }
+      await batch.commit();
+      _logger.info('Customers imported to Firebase: ${jsonData.length}');
     } else {
-      _logger.severe(
-        'Customer API error ${response.statusCode}: ${response.body}',
-      );
-      throw Exception('Failed to load customers: ${response.statusCode}');
+      throw Exception('Failed to import customers from API');
     }
   }
 }
