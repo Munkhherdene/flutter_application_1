@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "728552713392",
+    "project_id": "torkh-app",
+    "storage_bucket": "torkh-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728552713392:android:06047b5c5c71c09c6edf75",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALacUYRMsvfELIcy7iHFMOt3hiXA_dTSQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
